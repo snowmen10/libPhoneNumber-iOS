@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "NBPhoneNumberDefines.h"
-
+#import "NBGeneratedMetaData.h"
 
 @class NBPhoneMetaData;
 
-@interface NBMetadataHelper : NSObject
+
+@interface NBMetadataHelper : NBGeneratedMetaData
 
 + (BOOL)hasValue:(NSString *)string;
 

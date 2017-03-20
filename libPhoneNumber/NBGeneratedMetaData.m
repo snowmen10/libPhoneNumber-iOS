@@ -1,8 +1,9 @@
 /*****
- * Data Generated from GeneratePhoneNumberHeader.sh
- * Off of PhoneNumberMetaDataForTesting.json and PhoneNumberMetaData.json
- */
+* Data Generated from GeneratePhoneNumberHeader.sh
+*/
 
+#import <Foundation/Foundation.h>
+#import "NBGeneratedMetaData.h"
 #import "zlib.h"
 
 // z_const is not defined in some versions of zlib, so define it here
@@ -3970,3 +3971,9 @@ z_const Bytef kPhoneNumberMetaData[] = {
 z_const size_t kPhoneNumberMetaDataCompressedLength = sizeof(kPhoneNumberMetaData);
 z_const size_t kPhoneNumberMetaDataExpandedLength = 305176;
 #endif  // TESTING
+@implementation NBGeneratedMetaData : NSObject
+- (z_const size_t)phoneNumberMetaDataExpandedLength { return kPhoneNumberMetaDataExpandedLength; }
+- (z_const size_t)phoneNumberMetaDataCompressedLength { return kPhoneNumberMetaDataCompressedLength; }
+- (z_const Bytef *)data { return kPhoneNumberMetaData; }
+@end
+

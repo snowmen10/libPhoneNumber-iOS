@@ -8,7 +8,17 @@
 
 #import "NBMetadataHelper.h"
 #import "NBPhoneMetaData.h"
-#import "NBGeneratedPhoneNumberMetaData.h"
+#import "zlib.h"
+#import "NBGeneratedMetaData.h"
+
+
+@interface NBGeneratedMetaData (Internal)
+
+- (z_const size_t)phoneNumberMetaDataExpandedLength;
+- (z_const size_t)phoneNumberMetaDataCompressedLength;
+- (z_const Bytef *)data;
+
+@end
 
 
 @interface NBMetadataHelper ()
@@ -34,15 +44,15 @@
     dispatch_once(&onceToken, ^{
         // Data is a gzipped JSON file that is embedded in the binary.
         // See GeneratePhoneNumberHeader.sh and PhoneNumberMetaData.h for details.
-        NSMutableData* gunzippedData = [NSMutableData dataWithLength:kPhoneNumberMetaDataExpandedLength];
+        NSMutableData* gunzippedData = [NSMutableData dataWithLength:[super phoneNumberMetaDataExpandedLength]];
 
         z_stream zStream;
         memset(&zStream, 0, sizeof(zStream));
         __attribute((unused)) int err = inflateInit2(&zStream, 16);
         NSAssert(err == Z_OK, @"Unable to init stream. err = %d", err);
 
-        zStream.next_in = kPhoneNumberMetaData;
-        zStream.avail_in = (uint)kPhoneNumberMetaDataCompressedLength;
+        zStream.next_in = [super data];
+        zStream.avail_in = (uInt)[super phoneNumberMetaDataCompressedLength];
         zStream.next_out = (Bytef *)gunzippedData.bytes;
         zStream.avail_out = (uint)gunzippedData.length;
 
