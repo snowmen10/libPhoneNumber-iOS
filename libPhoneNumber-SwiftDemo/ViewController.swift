@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import libPhoneNumber
+import libPhoneNumberiOS
 
 
 class ViewController: UIViewController {
@@ -15,8 +15,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.blackColor()
-        textField.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.black
+        textField.backgroundColor = UIColor.white
         textField.frame.size.width = 200
         textField.frame.size.height = 25
         
